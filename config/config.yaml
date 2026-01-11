@@ -1,7 +1,7 @@
 defaults:
   - probe: attention
   - eval_datasets: dev_balanced
-  - model: llama-70b
+  - model: llama3-1b
   - baseline: llama3-1b-finetune
   - _self_
 

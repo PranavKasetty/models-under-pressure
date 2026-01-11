@@ -73,10 +73,10 @@ class ActivationStoreCLI:
                         dataset_path=dataset_path,
                         layer=layer,
                     )
-                    if store.exists(activations_spec):
-                        print(f"Layer {layer} already exists, skipping")
-                    else:
-                        filtered_layers.append(layer)
+                    # if store.exists(activations_spec):
+                    #     print(f"Layer {layer} already exists, skipping")
+                    # else:
+                    filtered_layers.append(layer)
 
                 if not filtered_layers:
                     print(f"No layers to store for {dataset_path}")
@@ -226,4 +226,5 @@ def exp(
 ):
     """Run an experiment."""
     run_experiments_path = Path(__file__).parent / "scripts/run_experiment.py"
+    subprocess.run(["python", str(run_experiments_path)] + experiment_args)
     subprocess.run(["python", str(run_experiments_path)] + experiment_args)

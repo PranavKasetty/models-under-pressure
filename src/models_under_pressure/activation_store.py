@@ -291,14 +291,14 @@ class ActivationStore:
         """
         manifest_row = ManifestRow.from_spec(spec)
 
-        if not self.exists(spec):
-            raise FileNotFoundError(f"Activations for {spec} not found")
+        # if not self.exists(spec):
+        #     raise FileNotFoundError(f"Activations for {spec} not found")
 
-        for path in manifest_row.paths:
-            key = str(path)
-            local_path = self.path / path
-            if not local_path.exists():
-                download_file(self.bucket, key, local_path)
+        # for path in manifest_row.paths:
+        #     key = str(path)
+        #     local_path = self.path / path
+        #     if not local_path.exists():
+        #         download_file(self.bucket, key, local_path)
 
         # Load and decompress each file
         activations = load_compressed(self.path / manifest_row.activations, mmap)
@@ -356,7 +356,7 @@ def load_compressed(path: Path, mmap: bool) -> torch.Tensor:
                     f_out.write(chunk)
                     pbar.update(f_in.tell() - pbar.n)
 
-    return torch.load(tmp_path, map_location="cpu", mmap=mmap)
+    return torch.load(f"{tmp_path}", map_location="cpu", mmap=mmap)
 
 
 def save_compressed(path: Path, tensor: torch.Tensor):
